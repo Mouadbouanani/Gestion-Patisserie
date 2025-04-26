@@ -4,14 +4,14 @@ public class Employee   {
     private int id_emp ;
     private String nom_complet_emp;
     private String post_emp;
-    private String  emial;
+    private String  email;
     private String passowrd ;
 
-    public Employee(int id_emp, String nom_complet_emp, String post_emp, String emial, String passowrd) {
+    public Employee(int id_emp, String nom_complet_emp, String post_emp, String email, String passowrd) {
         this.id_emp = id_emp;
         this.nom_complet_emp = nom_complet_emp;
         this.post_emp = post_emp;
-        this.emial = emial;
+        this.email = email;
         this.passowrd = passowrd;
     }
 
@@ -39,12 +39,12 @@ public class Employee   {
         this.post_emp = post_emp;
     }
 
-    public String getEmial() {
-        return emial;
+    public String getEmail() {
+        return email;
     }
 
-    public void setEmial(String emial) {
-        this.emial = emial;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassowrd() {
