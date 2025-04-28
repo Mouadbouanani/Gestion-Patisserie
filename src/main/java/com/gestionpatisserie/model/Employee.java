@@ -1,42 +1,42 @@
 package com.gestionpatisserie.model;
 
-public class Employee   {
-    private int id_emp ;
-    private String nom_complet_emp;
-    private String post_emp;
-    private String  email;
-    private String passowrd ;
+public class Employee {
+    private int employeeId;
+    private String fullName;
+    private String position;
+    private String email;
+    private String password;
 
-    public Employee(int id_emp, String nom_complet_emp, String post_emp, String email, String passowrd) {
-        this.id_emp = id_emp;
-        this.nom_complet_emp = nom_complet_emp;
-        this.post_emp = post_emp;
+    public Employee(int employeeId, String fullName, String position, String email, String password) {
+        this.employeeId = employeeId;
+        this.fullName = fullName;
+        this.position = position;
         this.email = email;
-        this.passowrd = passowrd;
+        this.password = password;
     }
 
-    public int getId_emp() {
-        return id_emp;
+    public int getEmployeeId() {
+        return employeeId;
     }
 
-    public void setId_emp(int id_emp) {
-        this.id_emp = id_emp;
+    public void setEmployeeId(int employeeId) {
+        this.employeeId = employeeId;
     }
 
-    public String getNom_complet_emp() {
-        return nom_complet_emp;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setNom_complet_emp(String nom_complet_emp) {
-        this.nom_complet_emp = nom_complet_emp;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
-    public String getPost_emp() {
-        return post_emp;
+    public String getPosition() {
+        return position;
     }
 
-    public void setPost_emp(String post_emp) {
-        this.post_emp = post_emp;
+    public void setPosition(String position) {
+        this.position = position;
     }
 
     public String getEmail() {
@@ -47,11 +47,11 @@ public class Employee   {
         this.email = email;
     }
 
-    public String getPassowrd() {
-        return passowrd;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPassowrd(String passowrd) {
-        this.passowrd = passowrd;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

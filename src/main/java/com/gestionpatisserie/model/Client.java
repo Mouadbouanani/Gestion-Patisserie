@@ -1,47 +1,47 @@
 package com.gestionpatisserie.model;
 
 public class Client {
-    private int id_client;
-    private String nom_complet_client;
-    private String adresse_client;
-    private String tels;
+    private int clientId;
+    private String fullName;
+    private String address;
+    private String phoneNumbers;
 
-    public Client(int id_client, String nom_complet_client, String adresse_client, String tels) {
-        this.id_client = id_client;
-        this.nom_complet_client = nom_complet_client;
-        this.adresse_client = adresse_client;
-        this.tels = tels;
+    public Client(int clientId, String fullName, String address, String phoneNumbers) {
+        this.clientId = clientId;
+        this.fullName = fullName;
+        this.address = address;
+        this.phoneNumbers = phoneNumbers;
     }
 
-    public int getId_client() {
-        return id_client;
+    public int getClientId() {
+        return clientId;
     }
 
-    public void setId_client(int id_client) {
-        this.id_client = id_client;
+    public void setClientId(int clientId) {
+        this.clientId = clientId;
     }
 
-    public String getNom_complet_client() {
-        return nom_complet_client;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setNom_complet_client(String nom_complet_client) {
-        this.nom_complet_client = nom_complet_client;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
-    public String getAdresse_client() {
-        return adresse_client;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdresse_client(String adresse_client) {
-        this.adresse_client = adresse_client;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public String getTels() {
-        return tels;
+    public String getPhoneNumbers() {
+        return phoneNumbers;
     }
 
-    public void setTels(String tels) {
-        this.tels = tels;
+    public void setPhoneNumbers(String phoneNumbers) {
+        this.phoneNumbers = phoneNumbers;
     }
 }
