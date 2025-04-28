@@ -6,6 +6,6 @@ module com.gestionpatisserie {
     requires org.kordamp.bootstrapfx.core;
     requires java.sql;
 
-    opens com.gestionpatisserie to javafx.fxml;
-    exports com.gestionpatisserie;
+    opens com.pastrymanagement to javafx.fxml;
+    exports com.pastrymanagement;
 }

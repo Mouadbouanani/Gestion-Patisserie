@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com</groupId>
-    <artifactId>GestionPatisserie</artifactId>
+    <artifactId>pastrymanagement</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>GestionPatisserie</name>
 
@@ -69,7 +69,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>com.gestionpatisserie/com.gestionpatisserie.HelloApplication</mainClass>
+                            <mainClass>com.gestionpatisserie/com.pastrymanagement.PastryManagement</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>
