@@ -2,6 +2,7 @@
 package com.gestionpatisserie.model;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Order {
@@ -10,6 +11,8 @@ public class Order {
     private BigDecimal amount;
     private String status;
     private int clientId;
+    ArrayList<OrderProduct> orderProducts;
+
 
     public Order(int clientId, String status, BigDecimal amount, Date orderDate, int orderId) {
         this.clientId = clientId;
@@ -17,6 +20,14 @@ public class Order {
         this.amount = amount;
         this.orderDate = orderDate;
         this.orderId = orderId;
+        this.orderProducts= new ArrayList<>();
+    }
+    public ArrayList<OrderProduct> getOrderProducts() {
+        return orderProducts;
+    }
+
+    public void setOrderProducts(ArrayList<OrderProduct> orderProducts) {
+        this.orderProducts = orderProducts;
     }
 
     public int getOrderId() {
