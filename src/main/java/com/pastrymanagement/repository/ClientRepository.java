@@ -56,8 +56,8 @@ public class ClientRepository {
     }
 
     // Read all clients
-    public List<Client> findAll() throws SQLException {
-        List<Client> clients = new ArrayList<>();
+    public ArrayList<Client> findAll() throws SQLException {
+        ArrayList<Client> clients = new ArrayList<>();
         String sql = "SELECT * FROM client";
 
         try (Connection conn = DBUtil.getConnection();

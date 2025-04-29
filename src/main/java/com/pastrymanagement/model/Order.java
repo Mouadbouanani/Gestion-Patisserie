@@ -1,32 +1,61 @@
 
 package com.pastrymanagement.model;
 
+
 import java.math.BigDecimal;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Order {
     private int orderId;
     private Date orderDate;
     private BigDecimal amount;
-    private String status;
+    private OrderStatus status;
     private int clientId;
-    ArrayList<OrderProduct> orderProducts;
+    private Map<Product, Integer> orderProducts;
+
+    public Order() {
+    }
 
 
-    public Order(int clientId, String status, BigDecimal amount, Date orderDate, int orderId) {
+    public Order(int clientId, BigDecimal amount, Date orderDate, int orderId) {
         this.clientId = clientId;
-        this.status = status;
+        this.status = OrderStatus.PENDING;
         this.amount = amount;
         this.orderDate = orderDate;
         this.orderId = orderId;
-        this.orderProducts= new ArrayList<>();
+        this.orderProducts = new HashMap<>();
     }
-    public ArrayList<OrderProduct> getOrderProducts() {
+
+    public Order(int clientId, String status, BigDecimal amount, int orderId, Map<Product, Integer> orderProducts) {
+        this.clientId = clientId;
+        this.status = OrderStatus.valueOf(status);
+        this.amount = amount;
+        this.orderDate = orderDate;
+        this.orderId = orderId;
+        this.orderProducts = orderProducts;
+    }
+
+    public Order(int clientId, BigDecimal amount, Date orderDate, OrderStatus status) {
+        this.clientId = clientId;
+        this.amount = amount;
+        this.orderDate = orderDate;
+        this.orderId = orderId;
+        this.status = status;
+        this.orderProducts = new HashMap<>();
+    }
+
+    public Map<Product, Integer> getOrderProducts() {
         return orderProducts;
     }
 
-    public void setOrderProducts(ArrayList<OrderProduct> orderProducts) {
+    public void setOrderProducts(Map<Product, Integer> orderProducts) {
         this.orderProducts = orderProducts;
     }
 
@@ -55,10 +84,10 @@ public class Order {
     }
 
     public String getStatus() {
-        return status;
+        return status.name();
     }
 
-    public void setStatus(String status) {
+    public void setStatus(OrderStatus status) {
         this.status = status;
     }
 
@@ -68,5 +97,77 @@ public class Order {
 
     public void setClientId(int clientId) {
         this.clientId = clientId;
+    }
+
+    public boolean addProduct(Product product, int quantity) {
+        if (orderProducts.containsKey(product)) {
+            orderProducts.put(product, orderProducts.get(product) + quantity);
+            return true;
+        } else {
+            orderProducts.put(product, quantity);
+            return true;
+        }
+
+    }
+
+    public boolean removeProduct(Product product) {
+        if (orderProducts.containsKey(product)) {
+            orderProducts.remove(product);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean modifyProductQuantity(Product product, int newQuantity) {
+        if (orderProducts.containsKey(product)) {
+            orderProducts.replace(product, orderProducts.get(product), newQuantity);
+            this.amount = this.calculAmount();
+            return true;
+        }
+        return false;
+    }
+
+    public void changeStatus(OrderStatus status) {
+        this.status = status;
+    }
+
+    public void cancelOrder() {
+        this.status = OrderStatus.CANCELLED;
+    }
+
+    public BigDecimal calculAmount() {
+        BigDecimal totalAmount = BigDecimal.ZERO;
+        for (Map.Entry<Product, Integer> entry : orderProducts.entrySet()) {
+            Product product = entry.getKey();
+            int quantity = entry.getValue();
+            totalAmount = totalAmount.add(product.getUnitPrice().multiply(BigDecimal.valueOf(quantity)));
+        }
+        return totalAmount;
+    }
+
+    public String getTimeRemaining() {
+        Date targetDate = this.getOrderDate();
+        // Convert Date to LocalDateTime
+        LocalDateTime targetDateTime = Instant.ofEpochMilli(targetDate.getTime())
+                .atZone(ZoneId.systemDefault())
+                .toLocalDateTime();
+
+        // Get current time
+        LocalDateTime now = LocalDateTime.now();
+
+        // Calculate the duration between now and the target date
+        Duration duration = Duration.between(now, targetDateTime);
+        if (duration.isNegative()) {
+            return "The target date has already passed.";
+        }
+        long totalSeconds = duration.getSeconds();
+        long days = totalSeconds / (24 * 3600);
+        totalSeconds %= (24 * 3600);
+        long hours = totalSeconds / 3600;
+        totalSeconds %= 3600;
+        long minutes = totalSeconds / 60;
+        long seconds = totalSeconds % 60;
+        return String.format("%d days, %d hours, %d minutes, %d seconds remaining.", days, hours, minutes, seconds);
     }
 }

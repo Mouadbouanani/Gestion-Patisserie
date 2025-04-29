@@ -114,4 +114,17 @@ public class ProductRepository {
         product.setAvailableQuantity(rs.getInt("available_quantity"));
         return product;
     }
+    public boolean updateAvailableQuantity(Product prod, int newQuantity){
+        Connection con=DBUtil.getConnection();
+        String sql="update product set available_quantity = ? where product_id = ?";
+        try(PreparedStatement preparedStatement=con.prepareStatement(sql)){
+            preparedStatement.setInt(1,newQuantity);
+            preparedStatement.setInt(2,prod.getProductId());
+            return preparedStatement.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false ;
+        }
+    }
 }

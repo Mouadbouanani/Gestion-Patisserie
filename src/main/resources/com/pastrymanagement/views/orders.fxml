@@ -23,12 +23,13 @@
                 <HBox alignment="CENTER_LEFT" spacing="10.0">
                     <TextField fx:id="searchOrderField" prefWidth="200.0" promptText="Search by order #..." />
                     <ComboBox fx:id="statusFilterComboBox" prefWidth="150.0" promptText="Status" />
-                    <Label text="From:" />
+                    <!-- <Label text="From:" />
                     <DatePicker fx:id="fromDatePicker" />
                     <Label text="To:" />
-                    <DatePicker fx:id="toDatePicker" />
+                    <DatePicker fx:id="toDatePicker" /> -->
                     <Button fx:id="searchButton" mnemonicParsing="false" onAction="#handleSearch" styleClass="action-button" text="Search" />
                     <Button fx:id="refreshButton" mnemonicParsing="false" onAction="#handleRefresh" styleClass="action-button" text="Refresh" />
+                    <Button fx:id="addOrderButton" mnemonicParsing="false" onAction="#handleAddOrder" styleClass="action-button" text="Add Order" />
                 </HBox>
             </children>
         </VBox>
@@ -42,7 +43,7 @@
                 <TableColumn fx:id="statusColumn" prefWidth="120.0" text="Status" />
                 <TableColumn fx:id="itemsColumn" prefWidth="80.0" text="Items" />
                 <TableColumn fx:id="totalColumn" prefWidth="100.0" text="Total" />
-                <TableColumn fx:id="assignedToColumn" prefWidth="150.0" text="Assigned To" />
+                <!-- <TableColumn fx:id="assignedToColumn" prefWidth="150.0" text="Assigned To" /> -->
             </columns>
         </TableView>
     </center>
@@ -54,7 +55,7 @@
             <children>
                 <Button fx:id="viewDetailsButton" mnemonicParsing="false" onAction="#handleViewDetails" styleClass="action-button" text="View Details" />
                 <Button fx:id="updateStatusButton" mnemonicParsing="false" onAction="#handleUpdateStatus" styleClass="action-button" text="Update Status" />
-                <Button fx:id="printInvoiceButton" mnemonicParsing="false" onAction="#handlePrintInvoice" styleClass="action-button" text="Print Invoice" />
+                <!-- <Button fx:id="printInvoiceButton" mnemonicParsing="false" onAction="#handlePrintInvoice" styleClass="action-button" text="Print Invoice" /> -->
             </children>
         </HBox>
     </bottom>

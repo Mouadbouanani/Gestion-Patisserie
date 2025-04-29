@@ -1,12 +1,15 @@
 package com.pastrymanagement.service;
 
+
 import com.pastrymanagement.model.Product;
+import com.pastrymanagement.repository.ProductRepository;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProductService {
+    ProductRepository productRepository;
 
     // Mock database
     private List<Product> products;
@@ -80,5 +83,21 @@ public class ProductService {
             }
         }
         return result;
+    }
+    public boolean decreaseProductQuantity(Product prod, int qte) {
+        int newQte = prod.getAvailableQuantity() - qte;
+        if (newQte >= 0) {
+            prod.setAvailableQuantity(newQte);
+            updateProduct(prod);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean increaseProductQuantity(Product prod, int qte) {
+        int newQte = prod.getAvailableQuantity() + qte;
+        prod.setAvailableQuantity(newQte);
+        updateProduct(prod);
+        return true;
     }
 }

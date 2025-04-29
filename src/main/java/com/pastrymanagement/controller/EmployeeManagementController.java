@@ -2,6 +2,7 @@ package com.pastrymanagement.controller;
 import com.pastrymanagement.model.Employee;
 import com.pastrymanagement.repository.EmployeeRepository;
 import com.pastrymanagement.controller.UserSession;
+import com.pastrymanagement.service.EmployeeService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -33,10 +34,12 @@ public class EmployeeManagementController {
 
     private EmployeeRepository employeeRepository;
     private ObservableList<Employee> employeeList;
+    private EmployeeService employeeService;
 
     @FXML
     public void initialize() {
         employeeRepository = new EmployeeRepository();
+
 
         // Initialize table columns
         idColumn.setCellValueFactory(new PropertyValueFactory<>("employeeId"));

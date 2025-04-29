@@ -79,7 +79,6 @@ public class EmployeeService {
             employeeRepository.delete(id);
         } catch (SQLException e) {
             System.err.println("Error deleting employee: " + e.getMessage());
-            throw new RuntimeException("Failed to delete employee", e);
         }
     }
 }
