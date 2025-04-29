@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane styleClass="main-background" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pastrymanagement.controller.EmployeeController">
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="10.0" styleClass="top-bar">
+            <padding>
+                <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+            </padding>
+            <children>
+                <TextField fx:id="searchField" prefWidth="300.0" promptText="Search..." styleClass="search-field" />
+                <Region HBox.hgrow="ALWAYS" />
+                <Label fx:id="usernameLabel" styleClass="username-label" text="Username" />
+                <Label fx:id="positionLabel" styleClass="position-label" text="Position" />
+                <Button fx:id="logoutButton" mnemonicParsing="false" onAction="#handleLogout" styleClass="logout-button" text="Logout" />
+            </children>
+        </HBox>
+    </top>
+    <left>
+        <VBox prefWidth="200.0" spacing="10.0" styleClass="sidebar">
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </padding>
+            <children>
+                <ImageView fx:id="sidebarLogo" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" />
+                <Label fx:id="welcomeLabel" styleClass="welcome-label" text="Welcome, User" />
+
+                <!-- Admin Menu -->
+                <VBox fx:id="adminMenu" spacing="5.0">
+                    <Label styleClass="menu-header" text="Admin Menu" />
+                    <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#showEmployeeManagement" styleClass="menu-button" text="Employee Management" />
+                    <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#showProducts" styleClass="menu-button" text="Products" />
+                    <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#showOrders" styleClass="menu-button" text="Orders" />
+                    <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#showReports" styleClass="menu-button" text="Reports" />
+                </VBox>
+
+                <!-- Cashier Menu -->
+                <VBox fx:id="cashierMenu" spacing="5.0">
+                    <Label styleClass="menu-header" text="Cashier Menu" />
+                    <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#createNewOrder" styleClass="menu-button" text="New Order" />
+                    <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#showOrders" styleClass="menu-button" text="Orders" />
+                    <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#showClients" styleClass="menu-button" text="Clients" />
+                    <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#showProducts" styleClass="menu-button" text="Products" />
+                </VBox>
+
+                <!-- Chef Menu -->
+                <VBox fx:id="chefMenu" spacing="5.0">
+                    <Label styleClass="menu-header" text="Chef Menu" />
+                    <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#showChefOrders" styleClass="menu-button" text="Pending Orders" />
+                    <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#showCompletedOrders" styleClass="menu-button" text="Completed Orders" />
+                    <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#showProducts" styleClass="menu-button" text="Products" />
+                </VBox>
+            </children>
+        </VBox>
+    </left>
+    <center>
+        <StackPane fx:id="contentArea">
+            <!-- Content will be loaded dynamically here -->
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </padding>
+            <children>
+                <Label styleClass="welcome-message" text="Welcome to Pastry Management System" />
+            </children>
+        </StackPane>
+    </center>
+</BorderPane>

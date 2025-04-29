@@ -7,6 +7,9 @@ public class Product {
     private String productName;
     private BigDecimal unitPrice; // Consider using BigDecimal instead of String for prices
     private int availableQuantity;
+    public Product() {
+        this(0, "", BigDecimal.ZERO, 0);
+    }
 
     public Product(int productId, String productName, BigDecimal unitPrice, int availableQuantity) {
         this.productId = productId;

@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane styleClass="login-background" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ordersystem.controller.LoginController">
+<StackPane styleClass="login-background" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pastrymanagement.controller.LoginController">
     <children>
         <VBox alignment="CENTER" maxHeight="500.0" maxWidth="400.0" spacing="15.0" styleClass="login-panel">
             <padding>

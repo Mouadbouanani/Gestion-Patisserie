@@ -5,6 +5,9 @@ public class Client {
     private String fullName;
     private String address;
     private String phoneNumbers;
+    public Client() {
+        this(0, "", "", "");
+    }
 
     public Client(int clientId, String fullName, String address, String phoneNumbers) {
         this.clientId = clientId;

@@ -6,6 +6,9 @@ public class Employee {
     private String position;
     private String email;
     private String password;
+    public Employee() {
+        this(0, "", "", "", "");
+    }
 
     public Employee(int employeeId, String fullName, String position, String email, String password) {
         this.employeeId = employeeId;
