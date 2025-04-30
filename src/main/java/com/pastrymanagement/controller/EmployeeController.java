@@ -71,10 +71,6 @@ public class EmployeeController implements Initializable {
             initializeByRole(currentEmployee.getPosition());
         }
 
-        // Setup search functionality
-//        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
-//            // Implement search based on current view
-//        });
     }
 
     public void initializeByRole(String position) {

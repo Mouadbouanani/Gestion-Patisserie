@@ -1,7 +1,6 @@
 package com.pastrymanagement;
 
 import com.pastrymanagement.controller.EmployeeController;
-import com.pastrymanagement.controller.ChefController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -67,20 +66,22 @@ public class PastryManagement extends Application {
     }
 
     public static void showMainScreen(String employeePosition) throws IOException {
-        String fxmlPath;
-        if ("Chef".equalsIgnoreCase(employeePosition)) {
-            fxmlPath = "/com/pastrymanagement/views/chef_main.fxml";
-        } else {
-            fxmlPath = "/com/pastrymanagement/views/main.fxml";
-        }
-
         // Debug: Print out where we're looking for the file
-        URL mainUrl = PastryManagement.class.getResource(fxmlPath);
-        System.out.println("Looking for FXML at: " + fxmlPath);
-        System.out.println("Found FXML URL: " + mainUrl);
+        String mainPath = "/views/main.fxml";
+        URL mainUrl = PastryManagement.class.getResource(mainPath);
+        System.out.println("Looking for main.fxml at: " + mainPath);
+        System.out.println("Found main.fxml URL: " + mainUrl);
 
         if (mainUrl == null) {
-            System.err.println("Error: FXML file not found at " + fxmlPath);
+            // Try an alternative path
+            mainPath = "/com/pastrymanagement/views/main.fxml";
+            mainUrl = PastryManagement.class.getResource(mainPath);
+            System.out.println("Trying alternate path: " + mainPath);
+            System.out.println("Found main.fxml URL: " + mainUrl);
+        }
+
+        if (mainUrl == null) {
+            System.err.println("Error: main.fxml not found!");
             return;
         }
 
@@ -88,23 +89,24 @@ public class PastryManagement extends Application {
         Parent root = loader.load();
 
         // Get controller and set employee position
-        if ("Chef".equalsIgnoreCase(employeePosition)) {
-            ChefController controller = loader.getController();
-            // Initialize chef-specific settings if needed
-        } else {
-            EmployeeController controller = loader.getController();
-            controller.initializeByRole(employeePosition);
-        }
+        EmployeeController controller = loader.getController();
+        controller.initializeByRole(employeePosition);
 
         Scene scene = new Scene(root);
 
         // Try to load stylesheet
-        URL stylesheetUrl = PastryManagement.class.getResource("/com/pastrymanagement/styles/styles.css");
+        URL stylesheetUrl = PastryManagement.class.getResource("/styles/styles.css");
         if (stylesheetUrl != null) {
-            System.out.println("Found stylesheet at: " + stylesheetUrl);
             scene.getStylesheets().add(stylesheetUrl.toExternalForm());
         } else {
-            System.err.println("Warning: Stylesheet not found!");
+            System.out.println("Warning: Stylesheet not found at /styles/styles.css");
+
+            // Try alternative path
+            stylesheetUrl = PastryManagement.class.getResource("/com/pastrymanagement/styles/styles.css");
+            if (stylesheetUrl != null) {
+                System.out.println("Found stylesheet at alternate path: " + stylesheetUrl);
+                scene.getStylesheets().add(stylesheetUrl.toExternalForm());
+            }
         }
 
         primaryStage.setTitle("Pastry Management System - " + employeePosition);
