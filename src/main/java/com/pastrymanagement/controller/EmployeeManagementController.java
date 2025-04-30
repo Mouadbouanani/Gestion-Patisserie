@@ -1,7 +1,5 @@
 package com.pastrymanagement.controller;
 import com.pastrymanagement.model.Employee;
-import com.pastrymanagement.repository.EmployeeRepository;
-import com.pastrymanagement.controller.UserSession;
 import com.pastrymanagement.service.EmployeeService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,7 +9,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,14 +26,13 @@ public class EmployeeManagementController {
     @FXML private Button resetPasswordButton;
     @FXML private Button refreshButton;
 
-    private EmployeeRepository employeeRepository;
-    private ObservableList<Employee> employeeList;
     private EmployeeService employeeService;
+    private ObservableList<Employee> employeeList;
 
     @FXML
     public void initialize() {
-        employeeRepository = new EmployeeRepository();
-
+        // Initialize the employee service
+        employeeService = new EmployeeService();
 
         // Initialize table columns
         idColumn.setCellValueFactory(new PropertyValueFactory<>("employeeId"));
@@ -69,10 +65,10 @@ public class EmployeeManagementController {
 
     private void loadEmployeeData() {
         try {
-            List<Employee> employees = employeeRepository.findAll();
+            List<Employee> employees = employeeService.getAllEmployees();
             employeeList = FXCollections.observableArrayList(employees);
             employeeTableView.setItems(employeeList);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             showAlert("Database Error", "Failed to load employees: " + e.getMessage(), Alert.AlertType.ERROR);
             e.printStackTrace();
         }
@@ -92,16 +88,12 @@ public class EmployeeManagementController {
         // Create form fields
         TextField fullNameField = new TextField();
         fullNameField.setPromptText("Full Name");
-//        TextField usernameField = new TextField();
-//        usernameField.setPromptText("Username");
         ComboBox<String> positionCombo = new ComboBox<>();
         positionCombo.getItems().addAll("Admin", "Cashier", "Chef");
         TextField emailField = new TextField();
         emailField.setPromptText("Email");
         PasswordField passwordField = new PasswordField();
         passwordField.setPromptText("Password");
-//        TextField phoneField = new TextField();
-//        phoneField.setPromptText("Phone");
 
         GridPane grid = new GridPane();
         grid.setHgap(10);
@@ -109,16 +101,12 @@ public class EmployeeManagementController {
         grid.setPadding(new Insets(20, 150, 10, 10));
         grid.add(new Label("Full Name:"), 0, 0);
         grid.add(fullNameField, 1, 0);
-//        grid.add(new Label("Username:"), 0, 1);
-//        grid.add(usernameField, 1, 1);
-        grid.add(new Label("Position:"), 0, 2);
-        grid.add(positionCombo, 1, 2);
-        grid.add(new Label("Email:"), 0, 3);
-        grid.add(emailField, 1, 3);
-        grid.add(new Label("Password:"), 0, 4);
-        grid.add(passwordField, 1, 4);
-//        grid.add(new Label("Phone:"), 0, 5);
-//        grid.add(phoneField, 1, 5);
+        grid.add(new Label("Position:"), 0, 1);
+        grid.add(positionCombo, 1, 1);
+        grid.add(new Label("Email:"), 0, 2);
+        grid.add(emailField, 1, 2);
+        grid.add(new Label("Password:"), 0, 3);
+        grid.add(passwordField, 1, 3);
 
         dialog.getDialogPane().setContent(grid);
 
@@ -127,12 +115,9 @@ public class EmployeeManagementController {
             if (dialogButton == saveButtonType) {
                 Employee employee = new Employee();
                 employee.setFullName(fullNameField.getText());
-//                employee.setUsername(usernameField.getText());
                 employee.setPosition(positionCombo.getValue());
                 employee.setEmail(emailField.getText());
                 employee.setPassword(passwordField.getText());
-//                employee.setPhone(phoneField.getText());
-//                employee.setStatus("Active");
                 return employee;
             }
             return null;
@@ -142,10 +127,10 @@ public class EmployeeManagementController {
 
         result.ifPresent(employee -> {
             try {
-                employeeRepository.create(employee);
+                employeeService.addEmployee(employee);
                 loadEmployeeData(); // Refresh table
                 showAlert("Success", "Employee added successfully", Alert.AlertType.INFORMATION);
-            } catch (SQLException e) {
+            } catch (Exception e) {
                 showAlert("Error", "Failed to add employee: " + e.getMessage(), Alert.AlertType.ERROR);
                 e.printStackTrace();
             }
@@ -171,15 +156,10 @@ public class EmployeeManagementController {
 
         // Create form fields with current values
         TextField fullNameField = new TextField(selectedEmployee.getFullName());
-//        TextField usernameField = new TextField(selectedEmployee.getUsername());
         ComboBox<String> positionCombo = new ComboBox<>();
         positionCombo.getItems().addAll("Admin", "Cashier", "Chef");
         positionCombo.setValue(selectedEmployee.getPosition());
         TextField emailField = new TextField(selectedEmployee.getEmail());
-//        TextField phoneField = new TextField(selectedEmployee.getPhone());
-        ComboBox<String> statusCombo = new ComboBox<>();
-        statusCombo.getItems().addAll("Active", "Inactive");
-//        statusCombo.setValue(selectedEmployee.getStatus());
 
         GridPane grid = new GridPane();
         grid.setHgap(10);
@@ -187,10 +167,10 @@ public class EmployeeManagementController {
         grid.setPadding(new Insets(20, 150, 10, 10));
         grid.add(new Label("Full Name:"), 0, 0);
         grid.add(fullNameField, 1, 0);
-        grid.add(new Label("Position:"), 0, 2);
-        grid.add(positionCombo, 1, 2);
-        grid.add(new Label("Email:"), 0, 3);
-        grid.add(emailField, 1, 3);
+        grid.add(new Label("Position:"), 0, 1);
+        grid.add(positionCombo, 1, 1);
+        grid.add(new Label("Email:"), 0, 2);
+        grid.add(emailField, 1, 2);
 
         dialog.getDialogPane().setContent(grid);
 
@@ -209,10 +189,10 @@ public class EmployeeManagementController {
 
         result.ifPresent(employee -> {
             try {
-                employeeRepository.update(employee);
+                employeeService.updateEmployee(employee);
                 loadEmployeeData(); // Refresh table
                 showAlert("Success", "Employee updated successfully", Alert.AlertType.INFORMATION);
-            } catch (SQLException e) {
+            } catch (Exception e) {
                 showAlert("Error", "Failed to update employee: " + e.getMessage(), Alert.AlertType.ERROR);
                 e.printStackTrace();
             }
@@ -236,10 +216,10 @@ public class EmployeeManagementController {
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
             try {
-                employeeRepository.delete(selectedEmployee.getEmployeeId());
+                employeeService.deleteEmployee(selectedEmployee.getEmployeeId());
                 loadEmployeeData(); // Refresh table
                 showAlert("Success", "Employee deleted successfully", Alert.AlertType.INFORMATION);
-            } catch (SQLException e) {
+            } catch (Exception e) {
                 showAlert("Error", "Failed to delete employee: " + e.getMessage(), Alert.AlertType.ERROR);
                 e.printStackTrace();
             }
@@ -297,9 +277,9 @@ public class EmployeeManagementController {
         result.ifPresent(newPassword -> {
             try {
                 selectedEmployee.setPassword(newPassword);
-                employeeRepository.update(selectedEmployee);
+                employeeService.updateEmployee(selectedEmployee);
                 showAlert("Success", "Password reset successfully", Alert.AlertType.INFORMATION);
-            } catch (SQLException e) {
+            } catch (Exception e) {
                 showAlert("Error", "Failed to reset password: " + e.getMessage(), Alert.AlertType.ERROR);
                 e.printStackTrace();
             }

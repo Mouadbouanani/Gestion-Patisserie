@@ -7,7 +7,7 @@ public class UserSession {
     private Employee currentEmployee;
 
     private UserSession() {
-        // Private constructor to prevent instantiation
+        // Private constructor for singleton pattern
     }
 
     public static synchronized UserSession getInstance() {
@@ -26,7 +26,7 @@ public class UserSession {
     }
 
     public void clearSession() {
-        currentEmployee = null;
+        this.currentEmployee = null;
     }
 
     public boolean isLoggedIn() {
@@ -34,14 +34,14 @@ public class UserSession {
     }
 
     public boolean isAdmin() {
-        return currentEmployee != null && "Admin".equals(currentEmployee.getPosition());
+        return isLoggedIn() && "Admin".equals(currentEmployee.getPosition());
     }
 
     public boolean isCashier() {
-        return currentEmployee != null && "Cashier".equals(currentEmployee.getPosition());
+        return isLoggedIn() && "Cashier".equals(currentEmployee.getPosition());
     }
 
     public boolean isChef() {
-        return currentEmployee != null && "Chef".equals(currentEmployee.getPosition());
+        return isLoggedIn() && "Chef".equals(currentEmployee.getPosition());
     }
 }

@@ -1,9 +1,9 @@
 package com.pastrymanagement.controller;
 
 import com.pastrymanagement.model.Employee;
+import com.pastrymanagement.service.EmployeeService;
 import com.pastrymanagement.service.OrderService;
 import com.pastrymanagement.service.ProductService;
-import com.pastrymanagement.controller.UserSession;
 import com.pastrymanagement.PastryManagement;
 import java.io.IOException;
 import java.net.URL;
@@ -50,12 +50,14 @@ public class EmployeeController implements Initializable {
     private Employee currentEmployee;
     private OrderService orderService;
     private ProductService productService;
+    private EmployeeService employeeService;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // Initialize services
         orderService = new OrderService();
         productService = new ProductService();
+        employeeService = new EmployeeService();
 
         // Load current user from session
         currentEmployee = UserSession.getInstance().getCurrentEmployee();
@@ -145,10 +147,6 @@ public class EmployeeController implements Initializable {
         loadView("/views/products.fxml");
     }
 
-    @FXML
-    private void showReports(ActionEvent event) {
-        loadView("/views/reports.fxml");
-    }
 
     // Cashier functionality
     @FXML
@@ -167,11 +165,11 @@ public class EmployeeController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/pastrymanagement/views/chef_orders.fxml"));
             Parent view = loader.load();
-            
+
             // Get the controller and set it to show pending orders
             ChefController controller = loader.getController();
             controller.setShowCompletedOrders(false);
-            
+
             contentArea.getChildren().clear();
             contentArea.getChildren().add(view);
         } catch (IOException e) {
@@ -185,11 +183,11 @@ public class EmployeeController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/pastrymanagement/views/chef_orders.fxml"));
             Parent view = loader.load();
-            
+
             // Get the controller and set it to show completed orders
             ChefController controller = loader.getController();
             controller.setShowCompletedOrders(true);
-            
+
             contentArea.getChildren().clear();
             contentArea.getChildren().add(view);
         } catch (IOException e) {
