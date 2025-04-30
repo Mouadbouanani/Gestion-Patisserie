@@ -18,7 +18,7 @@
                 <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
             </padding>
             <children>
-                <TextField fx:id="searchField" prefWidth="300.0" promptText="Search..." styleClass="search-field" />
+<!--                <TextField fx:id="searchField" prefWidth="300.0" promptText="Search..." styleClass="search-field" />-->
                 <Region HBox.hgrow="ALWAYS" />
                 <Label fx:id="usernameLabel" styleClass="username-label" text="Username" />
                 <Label fx:id="positionLabel" styleClass="position-label" text="Position" />

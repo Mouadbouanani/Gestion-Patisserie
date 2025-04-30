@@ -70,9 +70,9 @@ public class EmployeeController implements Initializable {
         }
 
         // Setup search functionality
-        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
-            // Implement search based on current view
-        });
+//        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+//            // Implement search based on current view
+//        });
     }
 
     public void initializeByRole(String position) {
