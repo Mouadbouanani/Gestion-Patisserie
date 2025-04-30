@@ -36,16 +36,15 @@
                 <Label fx:id="welcomeLabel" styleClass="welcome-label" text="Welcome, User" />
 
                 <!-- Admin Menu -->
-                <VBox fx:id="adminMenu" spacing="5.0">
+                <VBox fx:id="adminMenu" spacing="0.5">
                     <Label styleClass="menu-header" text="Admin Menu" />
                     <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#showEmployeeManagement" styleClass="menu-button" text="Employee Management" />
                     <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#showProducts" styleClass="menu-button" text="Products" />
                     <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#showOrders" styleClass="menu-button" text="Orders" />
-                    <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#showReports" styleClass="menu-button" text="Reports" />
                 </VBox>
 
                 <!-- Cashier Menu -->
-                <VBox fx:id="cashierMenu" spacing="5.0">
+                <VBox fx:id="cashierMenu" spacing="1.0">
                     <Label styleClass="menu-header" text="Cashier Menu" />
                     <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#createNewOrder" styleClass="menu-button" text="New Order" />
                     <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#showOrders" styleClass="menu-button" text="Orders" />
@@ -54,7 +53,7 @@
                 </VBox>
 
                 <!-- Chef Menu -->
-                <VBox fx:id="chefMenu" spacing="5.0">
+                <VBox fx:id="chefMenu" spacing="2.0">
                     <Label styleClass="menu-header" text="Chef Menu" />
                     <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#showChefOrders" styleClass="menu-button" text="Pending Orders" />
                     <Button maxWidth="Infinity" mnemonicParsing="false" onAction="#showCompletedOrders" styleClass="menu-button" text="Completed Orders" />

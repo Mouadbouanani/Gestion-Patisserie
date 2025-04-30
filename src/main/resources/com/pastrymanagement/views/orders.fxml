@@ -55,7 +55,6 @@
             <children>
                 <Button fx:id="viewDetailsButton" mnemonicParsing="false" onAction="#handleViewDetails" styleClass="action-button" text="View Details" />
                 <Button fx:id="updateStatusButton" mnemonicParsing="false" onAction="#handleUpdateStatus" styleClass="action-button" text="Update Status" />
-                <!-- <Button fx:id="printInvoiceButton" mnemonicParsing="false" onAction="#handlePrintInvoice" styleClass="action-button" text="Print Invoice" /> -->
             </children>
         </HBox>
     </bottom>

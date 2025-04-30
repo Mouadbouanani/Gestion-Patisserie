@@ -35,8 +35,6 @@
             <columns>
                 <TableColumn fx:id="idColumn" prefWidth="80.0" text="ID" />
                 <TableColumn fx:id="nameColumn" prefWidth="200.0" text="Name" />
-                <TableColumn fx:id="descriptionColumn" prefWidth="250.0" text="Description" />
-                <TableColumn fx:id="categoryColumn" prefWidth="120.0" text="Category" />
                 <TableColumn fx:id="priceColumn" prefWidth="100.0" text="Price" />
                 <TableColumn fx:id="stockColumn" prefWidth="80.0" text="Stock" />
                 <TableColumn fx:id="statusColumn" prefWidth="100.0" text="Status" />

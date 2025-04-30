@@ -54,8 +54,8 @@
                             <Label text="Delivery Date:" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                             <DatePicker fx:id="deliveryDatePicker" prefWidth="250.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
 
-                            <Label text="Notes:" GridPane.rowIndex="2" />
-                            <TextField fx:id="notesField" prefWidth="250.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="2" />
+<!--                            <Label text="Notes:" GridPane.rowIndex="2" />-->
+<!--                            <TextField fx:id="notesField" prefWidth="250.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="2" />-->
                         </children>
                     </GridPane>
                 </VBox>

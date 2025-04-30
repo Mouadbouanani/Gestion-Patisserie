@@ -5,6 +5,8 @@ public enum OrderStatus {
 
     PROCESSING("Order is being processed"),
 
+    COMPLETED("Order has been completed"),
+
     DELIVERED("Order delivered to customer"),
 
     CANCELLED("Order has been cancelled");

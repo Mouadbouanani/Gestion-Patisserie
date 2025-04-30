@@ -164,14 +164,39 @@ public class EmployeeController implements Initializable {
     // Chef functionality
     @FXML
     private void showChefOrders(ActionEvent event) {
-        loadView("/views/chef_orders.fxml");
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/pastrymanagement/views/chef_orders.fxml"));
+            Parent view = loader.load();
+            
+            // Get the controller and set it to show pending orders
+            ChefController controller = loader.getController();
+            controller.setShowCompletedOrders(false);
+            
+            contentArea.getChildren().clear();
+            contentArea.getChildren().add(view);
+        } catch (IOException e) {
+            System.err.println("Error loading chef orders view:");
+            e.printStackTrace();
+        }
     }
 
     @FXML
     private void showCompletedOrders(ActionEvent event) {
-        loadView("/views/completed_orders.fxml");
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/pastrymanagement/views/chef_orders.fxml"));
+            Parent view = loader.load();
+            
+            // Get the controller and set it to show completed orders
+            ChefController controller = loader.getController();
+            controller.setShowCompletedOrders(true);
+            
+            contentArea.getChildren().clear();
+            contentArea.getChildren().add(view);
+        } catch (IOException e) {
+            System.err.println("Error loading completed orders view:");
+            e.printStackTrace();
+        }
     }
-
 
     private void loadView(String fxmlPath) {
         try {

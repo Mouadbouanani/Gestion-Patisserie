@@ -1,19 +1,21 @@
 package com.pastrymanagement.controller;
 
-
 import com.pastrymanagement.model.Product;
 import com.pastrymanagement.service.ProductService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 
 import java.math.BigDecimal;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class ProductController {
+public class ProductController implements Initializable {
 
     @FXML private TextField searchProductField;
     @FXML private ComboBox<String> categoryComboBox;
@@ -24,8 +26,6 @@ public class ProductController {
     @FXML private TableView<Product> productsTableView;
     @FXML private TableColumn<Product, Integer> idColumn;
     @FXML private TableColumn<Product, String> nameColumn;
-    @FXML private TableColumn<Product, String> descriptionColumn;
-    @FXML private TableColumn<Product, String> categoryColumn;
     @FXML private TableColumn<Product, BigDecimal> priceColumn;
     @FXML private TableColumn<Product, Integer> stockColumn;
     @FXML private TableColumn<Product, String> statusColumn;
@@ -42,8 +42,8 @@ public class ProductController {
     private ProductService productService;
     private ObservableList<Product> productList;
 
-    @FXML
-    public void initialize() {
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         productService = new ProductService();
         productList = FXCollections.observableArrayList(productService.getAllProducts());
 

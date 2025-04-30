@@ -21,11 +21,8 @@ public class EmployeeManagementController {
     @FXML private TableView<Employee> employeeTableView;
     @FXML private TableColumn<Employee, Integer> idColumn;
     @FXML private TableColumn<Employee, String> nameColumn;
-    @FXML private TableColumn<Employee, String> usernameColumn;
     @FXML private TableColumn<Employee, String> positionColumn;
     @FXML private TableColumn<Employee, String> emailColumn;
-    @FXML private TableColumn<Employee, String> phoneColumn;
-    @FXML private TableColumn<Employee, String> statusColumn;
     @FXML private Button addEmployeeButton;
     @FXML private Button editButton;
     @FXML private Button deleteButton;
@@ -44,11 +41,8 @@ public class EmployeeManagementController {
         // Initialize table columns
         idColumn.setCellValueFactory(new PropertyValueFactory<>("employeeId"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("fullName"));
-//        usernameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
         positionColumn.setCellValueFactory(new PropertyValueFactory<>("position"));
         emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
-//        phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phone"));
-//        statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
 
         // Initialize position filter combobox
         filterPositionComboBox.getItems().addAll("All", "Admin", "Cashier", "Chef");
@@ -193,16 +187,10 @@ public class EmployeeManagementController {
         grid.setPadding(new Insets(20, 150, 10, 10));
         grid.add(new Label("Full Name:"), 0, 0);
         grid.add(fullNameField, 1, 0);
-//        grid.add(new Label("Username:"), 0, 1);
-//        grid.add(usernameField, 1, 1);
         grid.add(new Label("Position:"), 0, 2);
         grid.add(positionCombo, 1, 2);
         grid.add(new Label("Email:"), 0, 3);
         grid.add(emailField, 1, 3);
-//        grid.add(new Label("Phone:"), 0, 4);
-//        grid.add(phoneField, 1, 4);
-//        grid.add(new Label("Status:"), 0, 5);
-//        grid.add(statusCombo, 1, 5);
 
         dialog.getDialogPane().setContent(grid);
 
@@ -210,11 +198,8 @@ public class EmployeeManagementController {
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == saveButtonType) {
                 selectedEmployee.setFullName(fullNameField.getText());
-//                selectedEmployee.setUsername(usernameField.getText());
                 selectedEmployee.setPosition(positionCombo.getValue());
                 selectedEmployee.setEmail(emailField.getText());
-//                selectedEmployee.setPhone(phoneField.getText());
-//                selectedEmployee.setStatus(statusCombo.getValue());
                 return selectedEmployee;
             }
             return null;
