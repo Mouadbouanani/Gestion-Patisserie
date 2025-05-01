@@ -92,7 +92,7 @@ public class OrderRepository {
 
                 try {
                     OrderStatus status = OrderStatus.valueOf(statusStr);
-                    Order order = new Order(clientId, amount, orderDate, orderId);
+                    Order order = new Order(clientId, amount, orderDate);
                     order.setStatus(status);
                     orderList.add(order);
                 } catch (IllegalArgumentException e) {
@@ -121,7 +121,7 @@ public class OrderRepository {
                 String statusStr = rs.getString("status");
 
                 OrderStatus status = OrderStatus.valueOf(statusStr);
-                Order order = new Order(clientId, amount, orderDate, id);
+                Order order = new Order(clientId, amount, orderDate);
                 order.setStatus(status);
                 return order;
             } else {

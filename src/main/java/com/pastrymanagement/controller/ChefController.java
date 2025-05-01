@@ -127,39 +127,5 @@ public class ChefController implements Initializable {
         });
     }
 
-    @FXML
-    private void handleViewDetails() {
-        Order selectedOrder = ordersTableView.getSelectionModel().getSelectedItem();
-        if (selectedOrder == null) {
-            return;
-        }
 
-        try {
-            // Load order details view
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/pastrymanagement/views/order_details.fxml"));
-            Parent root = loader.load();
-
-            // Get controller and pass the selected order
-            OrderDetailsController controller = loader.getController();
-            controller.setOrder(selectedOrder);
-
-            // Show in new window
-            Stage stage = new Stage();
-            stage.setTitle("Order Details - #" + selectedOrder.getOrderId());
-            stage.setScene(new Scene(root));
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.showAndWait();
-
-            // Refresh table after dialog is closed
-            loadOrders();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText(null);
-            alert.setContentText("Could not open order details view.");
-            alert.showAndWait();
-        }
-    }
 } 

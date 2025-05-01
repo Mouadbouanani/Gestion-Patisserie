@@ -18,7 +18,6 @@
                 <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
             </padding>
             <children>
-<!--                <TextField fx:id="searchField" prefWidth="300.0" promptText="Search..." styleClass="search-field" />-->
                 <Region HBox.hgrow="ALWAYS" />
                 <Label fx:id="usernameLabel" styleClass="username-label" text="Username" />
                 <Label fx:id="positionLabel" styleClass="position-label" text="Position" />
@@ -29,10 +28,9 @@
     <left>
         <VBox prefWidth="200.0" spacing="10.0" styleClass="sidebar">
             <padding>
-                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                <Insets bottom="20.0" left="20.0" right="20.0" top="10.0" />
             </padding>
             <children>
-                <ImageView fx:id="sidebarLogo" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" />
                 <Label fx:id="welcomeLabel" styleClass="welcome-label" text="Welcome, User" />
 
                 <!-- Admin Menu -->

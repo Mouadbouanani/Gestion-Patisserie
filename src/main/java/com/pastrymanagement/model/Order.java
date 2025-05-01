@@ -3,10 +3,8 @@ package com.pastrymanagement.model;
 
 
 import java.math.BigDecimal;
-import java.time.Duration;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.sql.Date;
 import java.util.HashMap;
@@ -24,12 +22,12 @@ public class Order {
     }
 
 
-    public Order(int clientId, BigDecimal amount, Date orderDate, int orderId) {
+    public Order(int clientId, BigDecimal amount, Date orderDate) {
         this.clientId = clientId;
         this.status = OrderStatus.PENDING;
         this.amount = amount;
         this.orderDate = orderDate;
-        this.orderId = orderId;
+        this.orderId = generateOrderId();
         this.orderProducts = new HashMap<>();
     }
 
@@ -145,29 +143,9 @@ public class Order {
         }
         return totalAmount;
     }
-
-    public String getTimeRemaining() {
-        Date targetDate = this.getOrderDate();
-        // Convert Date to LocalDateTime
-        LocalDateTime targetDateTime = Instant.ofEpochMilli(targetDate.getTime())
-                .atZone(ZoneId.systemDefault())
-                .toLocalDateTime();
-
-        // Get current time
-        LocalDateTime now = LocalDateTime.now();
-
-        // Calculate the duration between now and the target date
-        Duration duration = Duration.between(now, targetDateTime);
-        if (duration.isNegative()) {
-            return "The target date has already passed.";
-        }
-        long totalSeconds = duration.getSeconds();
-        long days = totalSeconds / (24 * 3600);
-        totalSeconds %= (24 * 3600);
-        long hours = totalSeconds / 3600;
-        totalSeconds %= 3600;
-        long minutes = totalSeconds / 60;
-        long seconds = totalSeconds % 60;
-        return String.format("%d days, %d hours, %d minutes, %d seconds remaining.", days, hours, minutes, seconds);
+    public static int generateOrderId() {
+        return (int) (System.currentTimeMillis() % Integer.MAX_VALUE);
     }
+
+
 }

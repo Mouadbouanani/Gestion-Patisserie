@@ -108,7 +108,6 @@ public class ProductController implements Initializable {
             productList.setAll(productService.getAllProducts());
         } else {
             productList.setAll(productService.searchProducts(keyword));
-            // Additional filtering by category would go here
         }
         updateStatistics();
     }

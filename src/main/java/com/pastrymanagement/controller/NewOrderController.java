@@ -54,6 +54,7 @@ public class NewOrderController {
     @FXML private Button saveButton;
     @FXML private Button saveAndPrintButton;
 
+
     private ProductService productService;
     private OrderService orderService;
     private ObservableList<OrderItem> orderItems;
@@ -143,7 +144,12 @@ public class NewOrderController {
         updateOrderSummary();
 
         // Initialize sample client data
-        clientComboBox.getItems().addAll("John Smith", "Sarah Johnson", "Mike Williams", "Emma Davis");
+        ClientService clientService = new ClientService();
+        List<Client> clients = clientService.getAllClients();
+        clientComboBox.getItems().clear();
+        for (Client client : clients){
+        clientComboBox.getItems().addAll(client.getFullName());
+        }
     }
 
     private void refreshProductComboBox() {
@@ -417,7 +423,7 @@ public class NewOrderController {
 
     private void printOrder() {
         // This would implement printing functionality
-        showAlert("Print", "Printing functionality would be implemented here.");
+        showAlert("___", "_____");
     }
 
     private void closeWindow() {

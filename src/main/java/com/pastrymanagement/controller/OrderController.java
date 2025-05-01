@@ -196,36 +196,13 @@ public class OrderController implements Initializable {
         }
     }
 
-    @FXML
-    private void handleViewDetails(ActionEvent event) {
-        Order selectedOrder = ordersTableView.getSelectionModel().getSelectedItem();
-        if (selectedOrder == null) {
-            return;
-        }
-
-        try {
-            // Load order details view
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/pastrymanagement/view/OrderDetailsView.fxml"));
-            Parent root = loader.load();
-
-            // Get controller and pass the selected order
-            OrderDetailsController controller = loader.getController();
-            controller.setOrder(selectedOrder);
-
-            // Show in new window
-            Stage stage = new Stage();
-            stage.setTitle("Order Details - #" + selectedOrder.getOrderId());
-            stage.setScene(new Scene(root));
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.showAndWait();
-
-            // Refresh table after dialog is closed
-            loadAllOrders();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            AlertUtil.showError("Error", "Could not open order details view.");
-        }
+    // Helper method for showing alerts
+    private void showAlert(Alert.AlertType type, String title, String message) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
     @FXML
@@ -272,32 +249,11 @@ public class OrderController implements Initializable {
         });
     }
 
-    @FXML
-    private void handlePrintInvoice(ActionEvent event) {
-        Order selectedOrder = ordersTableView.getSelectionModel().getSelectedItem();
-        if (selectedOrder == null) {
-            return;
-        }
 
-        // In a real application, this would generate and print an invoice
-        // Here we're just showing a confirmation message
-        AlertUtil.showInformation("Print Invoice",
-                "Invoice for Order #" + selectedOrder.getOrderId() + " has been sent to the printer.");
-    }
 
-    // Order Details Controller class (would normally be in a separate file)
-    public static class OrderDetailsController {
-        private Order order;
 
-        public void setOrder(Order order) {
-            this.order = order;
-            // Initialize UI elements with order details
-        }
 
-        // Implementation for the order details view controller
-    }
-
-    // Utility class for showing alerts (would normally be in a separate file)
+    // Utility class for showing alerts
     public static class AlertUtil {
         public static void showError(String title, String message) {
             Alert alert = new Alert(Alert.AlertType.ERROR);

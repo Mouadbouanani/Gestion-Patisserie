@@ -23,7 +23,6 @@ import javafx.scene.layout.VBox;
 
 public class EmployeeController implements Initializable {
 
-    @FXML private TextField searchField;
     @FXML private Label usernameLabel;
     @FXML private Label positionLabel;
     @FXML private Button logoutButton;
@@ -38,14 +37,6 @@ public class EmployeeController implements Initializable {
     // Content area
     @FXML private StackPane contentArea;
 
-    //admin menu
-    @FXML private TextField searchEmployeeField;
-    @FXML private TableView<?> employeeTableView;
-    @FXML private Button addEmployeeButton;
-    @FXML private Button editButton;
-    @FXML private Button deleteButton;
-    @FXML private Button resetPasswordButton;
-    @FXML private Button refreshButton;
 
     private Employee currentEmployee;
     private OrderService orderService;
